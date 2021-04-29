@@ -1,0 +1,19 @@
+version: '2.1'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: web.Dockerfile
+    container_name: "tinypng-web"
+    volumes:
+      - "./web/html:/var/www/html"
+    expose:
+      - 8080
+
+  nginx:
+    image: "nginx:latest"
+    container_name: "tinypng-nginx"
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf"
+    ports: 
+      - "9001:80"
